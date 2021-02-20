@@ -1,10 +1,10 @@
 data "template_file" "moodle_script1" {
   template = file("moodle1_cloud_init.sh")
   vars = {
-    "ssh_public_key" 	= file("id_rsa.pub")
+    "ssh_public_key" 		= file("id_rsa.pub")
 	"ssh_private_key" 	= file("id_rsa")
-	"node1"				= oci_core_instance.moodle_main1.private_ip
-	"node2"				= oci_core_instance.moodle_main2.private_ip
+	"node1"		= oci_core_instance.moodle_main1.private_ip
+	"node2"		= oci_core_instance.moodle_main2.private_ip
   }
 }
 
@@ -73,7 +73,7 @@ data "template_file" "bastion_script" {
 	"ssh_private_key" 	= file("id_rsa")
 	"mysql_admin_user" 	= "${var.mysql_admin_user}"
 	"mysql_admin_password" 	= "${var.mysql_admin_password}"
-	"mysql_host" 			= "${oci_mysql_mysql_db_system.MoodleDb.ip_address}"
+	"mysql_host" 		= "${oci_mysql_mysql_db_system.MoodleDb.ip_address}"
   }
 }
 
@@ -93,9 +93,9 @@ data "template_file" "moodle_script2" {
   template = file("moodle2_cloud_init.sh")
   vars = {
     "ssh_public_key" 	= file("id_rsa.pub")
-	"ssh_private_key" 	= file("id_rsa")
-	"node1"					= oci_core_instance.moodle_main1.private_ip
-	"node2"					= oci_core_instance.moodle_main2.private_ip
+	"ssh_private_key" = file("id_rsa")
+	"node1"		= oci_core_instance.moodle_main1.private_ip
+	"node2"		= oci_core_instance.moodle_main2.private_ip
   }
 }
 
