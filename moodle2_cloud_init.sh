@@ -31,10 +31,10 @@ echo "moodledata and html dir created $(date -R)!" >> /home/opc/install.log
 sudo o2cb add-cluster moodle
 echo "moodle cluster is created $(date -R)!" >> /home/opc/install.log
 
-sudo o2cb add-node moodle moodle-main1 --ip 10.20.1.7
+sudo o2cb add-node moodle moodle-main1 --ip ${node1}
 echo "moodle node1 is added to cluster $(date -R)!" >> /home/opc/install.log
 
-sudo o2cb add-node moodle moodle-main2 --ip 10.20.1.6
+sudo o2cb add-node moodle moodle-main2 --ip ${node2}
 echo "moodle node2 is added to cluster $(date -R)!" >> /home/opc/install.log
 
 (echo y; echo o2cb; echo moodle; echo 31; echo 30000; echo 2000; echo 2000) | sudo /sbin/o2cb.init configure
@@ -62,25 +62,10 @@ sudo sh -c 'echo "/dev/sdb /var/www/html ocfs2     _netdev,defaults   0 0" >> /e
 echo "fstab is updated $(date -R)!" >> /home/opc/install.log
 
 
-
-
-
-
 sleep 120
 
 sudo mount -a
 echo "disks are mounted $(date -R)!" >> /home/opc/install.log
-
-
-sudo chcon --type httpd_sys_rw_content_t html
-echo "chcon html $(date -R)!" >> /home/opc/install.log
-
-sudo chcon --type httpd_sys_rw_content_t moodledata
-echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
-
-sudo setsebool -P httpd_can_network_connect_db 1
-echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
-
 
 sudo systemctl start httpd
 echo "Apache is up and running $(date -R)!"  >> /home/opc/install.log
@@ -91,9 +76,17 @@ echo "mysql repo installed $(date -R)!" >> /home/opc/install.log
 sudo yum install -y mysql-shell
 echo "mysql shell installed $(date -R)!" >> /home/opc/install.log
 
-echo "Finished at $(date -R)!" >> /home/opc/install.log
-
-
 sudo systemctl disable firewalld
 
 echo "Firewall is disabled $(date -R)!" >> /home/opc/install.log
+
+sudo chcon --type httpd_sys_rw_content_t html
+echo "chcon html $(date -R)!" >> /home/opc/install.log
+
+sudo chcon --type httpd_sys_rw_content_t moodledata
+echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
+
+sudo setsebool -P httpd_can_network_connect_db 1
+echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
+
+echo "Finished at $(date -R)!" >> /home/opc/install.log

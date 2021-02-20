@@ -3,8 +3,8 @@ data "template_file" "moodle_script1" {
   vars = {
     "ssh_public_key" 	= file("id_rsa.pub")
 	"ssh_private_key" 	= file("id_rsa")
-	"node1"					= oci_core_instance.moodle_main1.private_ip
-	"node2"					= oci_core_instance.moodle_main2.private_ip
+	"node1"				= oci_core_instance.moodle_main1.private_ip
+	"node2"				= oci_core_instance.moodle_main2.private_ip
   }
 }
 
@@ -56,6 +56,8 @@ resource "null_resource" "moodle1_cloud_init" {
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodledata_attach1.iqn} -p ${oci_core_volume_attachment.moodledata_attach1.ipv4}:${oci_core_volume_attachment.moodledata_attach1.port} -o update -n node.session.auth.username -v ${oci_core_volume_attachment.moodledata_attach1.chap_username}",
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodledata_attach1.iqn} -p ${oci_core_volume_attachment.moodledata_attach1.ipv4}:${oci_core_volume_attachment.moodledata_attach1.port} -o update -n node.session.auth.password -v ${oci_core_volume_attachment.moodledata_attach1.chap_secret}",
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodledata_attach1.iqn} -p ${oci_core_volume_attachment.moodledata_attach1.ipv4}:${oci_core_volume_attachment.moodledata_attach1.port} -l",
+		"sudo yum install dos2unix -y",
+		"dos2unix ~/moodle1_cloud_init.sh",
 		"chmod +x ~/moodle1_cloud_init.sh",
 		"sudo ~/moodle1_cloud_init.sh"
     ]
@@ -144,6 +146,8 @@ resource "null_resource" "moodle2_cloud_init" {
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodlehtml_attach2.iqn} -p ${oci_core_volume_attachment.moodlehtml_attach2.ipv4}:${oci_core_volume_attachment.moodlehtml_attach2.port} -o update -n node.session.auth.username -v ${oci_core_volume_attachment.moodlehtml_attach2.chap_username}",
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodlehtml_attach2.iqn} -p ${oci_core_volume_attachment.moodlehtml_attach2.ipv4}:${oci_core_volume_attachment.moodlehtml_attach2.port} -o update -n node.session.auth.password -v ${oci_core_volume_attachment.moodlehtml_attach2.chap_secret}",
 		"sudo iscsiadm -m node -T ${oci_core_volume_attachment.moodlehtml_attach2.iqn} -p ${oci_core_volume_attachment.moodlehtml_attach2.ipv4}:${oci_core_volume_attachment.moodlehtml_attach2.port} -l",
+		"sudo yum install dos2unix -y",
+		"dos2unix ~/moodle2_cloud_init.sh",
 		"chmod +x ~/moodle2_cloud_init.sh",
 		"sudo ~/moodle2_cloud_init.sh"
     ]

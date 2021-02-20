@@ -31,10 +31,10 @@ echo "moodledata and html dir created $(date -R)!" >> /home/opc/install.log
 sudo o2cb add-cluster moodle
 echo "moodle cluster is created $(date -R)!" >> /home/opc/install.log
 
-sudo o2cb add-node moodle moodle-main1 --ip 10.20.1.7
+sudo o2cb add-node moodle moodle-main1 --ip ${node1}
 echo "moodle node1 is added to cluster $(date -R)!" >> /home/opc/install.log
 
-sudo o2cb add-node moodle moodle-main2 --ip 10.20.1.6
+sudo o2cb add-node moodle moodle-main2 --ip ${node2}
 echo "moodle node2 is added to cluster $(date -R)!" >> /home/opc/install.log
 
 (echo y; echo o2cb; echo moodle; echo 31; echo 30000; echo 2000; echo 2000) | sudo /sbin/o2cb.init configure
@@ -64,7 +64,7 @@ echo "fstab is updated $(date -R)!" >> /home/opc/install.log
 sudo wget https://download.moodle.org/download.php/direct/stable38/moodle-latest-38.tgz
 echo "moodle downloaded $(date -R)!" >> /home/opc/install.log
 
-sudo tar -xzvf moodle-latest-38.tgz
+sudo tar -xzvf moodle-latest-38.tgz -C /var/www/html/
 echo "moodle unzipped $(date -R)!" >> /home/opc/install.log
 
 sudo mount -a

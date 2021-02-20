@@ -60,7 +60,7 @@ resource "oci_core_instance" "moodle_main1" {
 
 resource "oci_core_instance" "moodle_main2" {
 	availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
-	fault_domain 		= data.oci_identity_fault_domains.test_fault_domains.fault_domains[1].name
+	fault_domain 		= data.oci_identity_fault_domains.test_fault_domains.fault_domains[2].name
 	compartment_id 		= var.compartment_ocid
 	display_name 		= var.instance_name2
 	shape 				= var.instance_shape
