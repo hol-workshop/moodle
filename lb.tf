@@ -1,18 +1,9 @@
-resource "oci_core_public_ip" "reserved_public_ip_assigned" {
-  compartment_id = var.compartment_ocid
-  display_name   = "ReservedPublicIP"
-  lifetime       = "RESERVED"
-}
-
 ##Public LoadBalancer for Moodle Webservers
 
 resource "oci_load_balancer" "public_loadbalancer" {
 	shape          	= "10Mbps"
 	compartment_id 	= var.compartment_ocid
 	is_private 		= false
-	reserved_ips {
-        id = oci_core_public_ip.reserved_public_ip_assigned.id
-    }
 	subnet_ids 		= [
 		oci_core_subnet.vcn_moodle_public_subnet.id,
 	]
