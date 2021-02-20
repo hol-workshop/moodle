@@ -18,12 +18,10 @@ The this architecture contains a public load balancer, two moodle application se
 2. Login to your Oracle cloud tenancy with appropriate credentials.
 3. Review and accept [Oracle Terms of Use](https://cloudmarketplace.oracle.com/marketplace/content?contentId=50511634&render=inline).
 4. Enter a name for this deployment and choose target compartment, then click next
-5. 
 6. Follow the on-screen prompts and instructions to create the stack.
-7. After creating the stack, click Terraform Actions, and select Plan.
-8. Wait for the job to be completed, and review the plan.
-9. To make any changes, return to the Stack Details page, click Edit Stack, and make the required changes. Then, run the Plan action again.
-If no further changes are necessary, return to the Stack Details page, click Terraform Actions, and select Apply.
+7. Once stack is created, click on Terraform Actions, and choose Plan.
+8. Wait for the plan job to be completed. Click on Terraform Actions again, this time choose Apply.
+9. Check out apply job output and wait until it finishes.
 
 ### Clone to your local machine
 If you want to run this terraform from your local machine, use below commands to clone it.
