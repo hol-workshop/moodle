@@ -5,14 +5,15 @@ The this architecture contains a public load balancer, two moodle application se
 # Clone to your local machine
 If you want to run this terraform from your local machine, use below commands to clone it.
 
-    git clone https://github.com/oracle-quickstart/oci-arch-tomcat-mds.git
-    cd oci-arch-tomcat-mds
+    git clone https://github.com/hol-workshop/moodle.git
+    cd moodle
     ls
 
 # Create the Resources
 
-Run the following commands:
+Once you are in your downloaded diretory, run the following commands:
 
-terraform init
-terraform plan
-terraform apply
+    terraform init
+    terraform plan
+    terraform apply
+
