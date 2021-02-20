@@ -64,27 +64,14 @@ echo "fstab is updated $(date -R)!" >> /home/opc/install.log
 sudo wget https://download.moodle.org/download.php/direct/stable38/moodle-latest-38.tgz
 echo "moodle downloaded $(date -R)!" >> /home/opc/install.log
 
-sudo tar -xzvf moodle-latest-38.tgz -C /var/www/html/
+sudo tar -xzvf moodle-latest-38.tgz -C /var/www/html
 echo "moodle unzipped $(date -R)!" >> /home/opc/install.log
 
 sudo mount -a
 echo "disks are mounted $(date -R)!" >> /home/opc/install.log
 
-sudo rsync -rtv moodle/ html/
-echo "moodle is copied to html $(date -R)!" >> /home/opc/install.log
-
-sudo chown apache. -R html moodledata
+sudo chown apache.apache -R html moodledata
 echo "folder ownership changed to apache $(date -R)!" >> /home/opc/install.log
-
-sudo chcon --type httpd_sys_rw_content_t html
-echo "chcon html $(date -R)!" >> /home/opc/install.log
-
-sudo chcon --type httpd_sys_rw_content_t moodledata
-echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
-
-sudo setsebool -P httpd_can_network_connect_db 1
-echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
-
 
 sudo systemctl start httpd
 echo "Apache is up and running $(date -R)!"  >> /home/opc/install.log
@@ -95,8 +82,17 @@ echo "mysql repo installed $(date -R)!" >> /home/opc/install.log
 sudo yum install -y mysql-shell
 echo "mysql shell installed $(date -R)!" >> /home/opc/install.log
 
-echo "Finished at $(date -R)!" >> /home/opc/install.log
-
 sudo systemctl disable firewalld
 
 echo "Firewall is disabled $(date -R)!" >> /home/opc/install.log
+
+sudo chcon --type httpd_sys_rw_content_t html
+echo "chcon html $(date -R)!" >> /home/opc/install.log
+
+sudo chcon --type httpd_sys_rw_content_t moodledata
+echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
+
+sudo setsebool -P httpd_can_network_connect_db 1
+echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
+
+echo "Finished at $(date -R)!" >> /home/opc/install.log
