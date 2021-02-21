@@ -52,6 +52,7 @@ Open your web browser and enter output of Moodle_LB_IP_address slash moodle.
 For example, following was my output:
 
 - http://132.145.227.203/
+
 You will have to simply follow the wizard here and update some parameters:
 
 - Database host, this is your MysqlDB_Private_IP output
@@ -66,4 +67,4 @@ You will have to simply follow the wizard here and update some parameters:
 It will take you 1-2 mins for completing wizard and you will have fully working moodle environment afterwards. Goodluck!
 
 
-![](https://youtu.be/fCxtCtD7S28)
+https://youtu.be/fCxtCtD7S28
