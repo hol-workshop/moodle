@@ -66,11 +66,11 @@ variable "num_iscsi_volumes_per_instance" {
 }
 
 variable "instance_shape" {
-  default = "VM.Standard.E2.2"
+  default = "VM.Standard.E2.1"
 }
 
 variable "db_size" {
-  default = "50" # size in GBs
+  default = "55" # size in GBs
 }
 
 variable "instance_image_ocid" {

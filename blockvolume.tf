@@ -1,4 +1,4 @@
-
+#### HTML DISK
 resource "oci_core_volume" "moodlehtml" {
 	availability_domain 	= data.oci_identity_availability_domains.ads.availability_domains[0].name
 	compartment_id      	= var.compartment_ocid
@@ -14,7 +14,7 @@ resource "oci_core_volume_attachment" "moodlehtml_attach1" {
 	device          =  "/dev/oracleoci/oraclevdb"
 	is_read_only = false
 	is_shareable = true
-	use_chap = true
+	use_chap = false
 }
 
 resource "oci_core_volume_attachment" "moodlehtml_attach2" {
@@ -24,8 +24,9 @@ resource "oci_core_volume_attachment" "moodlehtml_attach2" {
 	device          =  "/dev/oracleoci/oraclevdb"
 	is_read_only = false
 	is_shareable = true
-	use_chap = true
+	use_chap = false
 }
+#### DATA DISK
 
 resource "oci_core_volume" "moodledata" {
 	availability_domain 	= data.oci_identity_availability_domains.ads.availability_domains[0].name
@@ -42,7 +43,7 @@ resource "oci_core_volume_attachment" "moodledata_attach1" {
 	device          =  "/dev/oracleoci/oraclevdc" 
 	is_read_only = false
 	is_shareable = true
-	use_chap = true
+	use_chap = false
 }
 
 resource "oci_core_volume_attachment" "moodledata_attach2" {
@@ -52,5 +53,5 @@ resource "oci_core_volume_attachment" "moodledata_attach2" {
 	device          =  "/dev/oracleoci/oraclevdc" 
 	is_read_only = false
 	is_shareable = true
-	use_chap = true
+	use_chap = false
 }

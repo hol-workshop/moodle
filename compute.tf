@@ -11,7 +11,7 @@ resource "tls_private_key" "opc_key" {
 ### BASTION HOST
 
 resource "oci_core_instance" "bastion" {
-	availability_domain 	= data.oci_identity_availability_domains.ads.availability_domains[2].name
+	availability_domain 	= data.oci_identity_availability_domains.ads.availability_domains[1].name
 	compartment_id 		= var.compartment_ocid
 	display_name 			= "bastion_host"
 	shape 				= var.instance_shape
@@ -35,7 +35,7 @@ resource "oci_core_instance" "bastion" {
 }
 
 
-## MAIN APP SERVERS
+## APP SERVER 1
 
 resource "oci_core_instance" "moodle_main1" {
 	availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
@@ -51,12 +51,14 @@ resource "oci_core_instance" "moodle_main1" {
 	source_details {
 		source_type 			= "image"
 		source_id   			= var.instance_image_ocid[var.region]
-		boot_volume_size_in_gbs = "60"
+		boot_volume_size_in_gbs = "50"
 	}
 	metadata = {
 		ssh_authorized_keys = file("id_rsa.pub")
   }
 }
+
+## APP SERVER 2
 
 resource "oci_core_instance" "moodle_main2" {
 	availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
@@ -72,7 +74,7 @@ resource "oci_core_instance" "moodle_main2" {
 	source_details {
 		source_type 			= "image"
 		source_id   			= var.instance_image_ocid[var.region]
-		boot_volume_size_in_gbs = "60"
+		boot_volume_size_in_gbs = "50"
 	}
 	metadata = {
 		ssh_authorized_keys = file("id_rsa.pub")
