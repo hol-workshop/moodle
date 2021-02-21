@@ -79,10 +79,13 @@ echo "moodle unzipped $(date -R)!" >> /home/opc/install.log
 sudo rsync -rtv moodle/ html/
 echo "moodle is copied to html $(date -R)!" >> /home/opc/install.log
 
-sudo chown apache.apache -R moodledata
+sudo chown apache.apache moodledata
 echo "moodledata folder ownership changed to apache $(date -R)!" >> /home/opc/install.log
 
-sudo chown apache.apache -R html/*
+sudo chown apache.apache html
+echo "html folder ownership changed to apache $(date -R)!" >> /home/opc/install.log
+
+sudo chown apache.apache html/*
 echo "html folder ownership changed to apache $(date -R)!" >> /home/opc/install.log
 
 sudo sudo chcon -R --type httpd_sys_rw_content_t /var/www/html/*
