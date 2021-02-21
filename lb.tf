@@ -7,7 +7,7 @@ resource "oci_load_balancer" "public_loadbalancer" {
 	subnet_ids 		= [
 		oci_core_subnet.vcn_moodle_public_subnet.id,
 	]
-	display_name 	= "PublicLoadBalancer"
+	display_name 	= "MoodleBalancer"
 }
 
 resource "oci_load_balancer_backend_set" "lb_backendset" {
@@ -22,7 +22,12 @@ resource "oci_load_balancer_backend_set" "lb_backendset" {
 		timeout_in_millis   	= "3000"
 		retries             	= "3"
 		}
-	
+	lb_cookie_session_persistence_configuration {
+		cookie_name = "X-Oracle-BMC-LBS-Route"
+		is_http_only = "true"
+		is_secure    = "false"
+		path = "/"
+	}
 }
 
 resource "oci_load_balancer_listener" "lb_listener" {

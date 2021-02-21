@@ -16,7 +16,7 @@ echo "remi repo installed $(date -R)!" >> /home/opc/install.log
 sudo yum-config-manager --enable remi-php74
 echo "repo enabled $(date -R)!" >> /home/opc/install.log
 
-sudo yum install php php-cli php-mysqlnd php-zip php-gd  php-mcrypt php-mbstring php-xml php-json php-intl php-xmlrpc php-soap php-opcache -y
+sudo yum install dos2unix php php-cli php-mysqlnd php-zip php-gd  php-mcrypt php-mbstring php-xml php-json php-intl php-xmlrpc php-soap php-opcache -y
 echo "php installed $(date -R)!" >> /home/opc/install.log
 
 sudo yum install ocfs2-tools-devel ocfs2-tools -y
@@ -76,16 +76,16 @@ sudo mount -a
 echo "disks are mounted $(date -R)!" >> /home/opc/install.log
 
 
-sudo chcon --type httpd_sys_rw_content_t /var/www/html
-echo "chcon html $(date -R)!" >> /home/opc/install.log
+#sudo sudo chcon -R --type httpd_sys_rw_content_t /var/www/html
+#echo "chcon html $(date -R)!" >> /home/opc/install.log
 
-sudo chcon --type httpd_sys_rw_content_t /var/www/moodledata
-echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
+#sudo chcon --type httpd_sys_rw_content_t /var/www/moodledata
+#echo "chcon moodledata $(date -R)!" >> /home/opc/install.log
 
-sudo setsebool -P httpd_can_network_connect_db 1
-echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
+#sudo setsebool -P httpd_can_network_connect_db 1
+#echo "SELinux enabled apache $(date -R)!" >> /home/opc/install.log
 
-sudo systemctl start httpd
+sudo systemctl restart httpd
 echo "Apache is up and running $(date -R)!"  >> /home/opc/install.log
 
 echo "Finished at $(date -R)!" >> /home/opc/install.log
