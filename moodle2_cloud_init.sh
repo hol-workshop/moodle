@@ -16,7 +16,7 @@ echo "remi repo installed $(date -R)!" >> /home/opc/install.log
 sudo yum-config-manager --enable remi-php74
 echo "repo enabled $(date -R)!" >> /home/opc/install.log
 
-sudo yum install dos2unix php php-cli php-mysqlnd php-zip php-gd  php-mcrypt php-mbstring php-xml php-json php-intl php-xmlrpc php-soap php-opcache -y
+sudo yum install php php-cli php-mysqlnd php-zip php-gd  php-mcrypt php-mbstring php-xml php-json php-intl php-xmlrpc php-soap php-opcache -y
 echo "php installed $(date -R)!" >> /home/opc/install.log
 
 sudo yum install ocfs2-tools-devel ocfs2-tools -y
@@ -62,10 +62,10 @@ echo "mysql repo installed $(date -R)!" >> /home/opc/install.log
 sudo yum install -y mysql-shell
 echo "mysql shell installed $(date -R)!" >> /home/opc/install.log
 
-sudo sh -c 'echo "/dev/sdb /var/www/html ocfs2     defaults,_netdev,nofail   0 2" >> /etc/fstab'
+sudo sh -c 'echo "/dev/sdb /var/www/html ocfs2     defaults,_netdev   0 2" >> /etc/fstab'
 echo "fstab is updated $(date -R)!" >> /home/opc/install.log
 
-sudo sh -c 'echo "/dev/sdc /var/www/moodledata ocfs2     defaults,_netdev,nofail   0 2" >> /etc/fstab'
+sudo sh -c 'echo "/dev/sdc /var/www/moodledata ocfs2     defaults,_netdev   0 2" >> /etc/fstab'
 echo "fstab is updated $(date -R)!" >> /home/opc/install.log
 
 
